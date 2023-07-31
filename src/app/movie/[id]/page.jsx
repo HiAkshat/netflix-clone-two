@@ -33,7 +33,10 @@ export default async function Page({params}){
 
       <div className="flex gap-[65px]">
         <div className="w-[300px]">
-          <img className="w-[300px]" src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} alt="" />
+          {data.poster_path ?
+          <img className="w-[300px]" src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} alt="" /> :
+          <img className="w-[300px]" src={`/no_poster.webp`} alt="" />
+          }
         </div>
 
         <div className="flex flex-col max-w-[925px] gap-[53px]">
@@ -55,11 +58,15 @@ export default async function Page({params}){
             <p className="text-[24px] leading-[30px]">{data.overview}</p>
           </div>
 
-          <div className="flex items-center gap-[12px] max-w-fit">
-            <div><PlayArrowRoundedIcon fontSize="large"/></div>
-            <span className="text-[24px]">Watch Trailer</span>
-          </div>
+          <Link href={`/movie/${params.id}/trailer`}>
+            <div className="flex items-center gap-[12px] max-w-fit">
+              <div><PlayArrowRoundedIcon fontSize="large"/></div>
+              <span className="text-[24px]">Watch Trailer</span>
+            </div>
+          </Link>
         </div>
+
+
       </div>
 
       <div className="flex flex-col gap-[20px]">
@@ -86,7 +93,7 @@ export default async function Page({params}){
                 <Link href={`/movie/${movie.id}`}>
                   {movie.poster_path!=null ?
                   <img className="w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
-                  <img className="w-[240px]" src={`/poster.jpg`} alt="" />
+                  <img className="w-[240px] h-[355px] object-cover" src={`/no_poster.webp`} alt="" />
                   }
                 </Link>
               </div>
@@ -104,7 +111,7 @@ export default async function Page({params}){
                 <Link href={`/movie/${movie.id}`}>
                   {movie.poster_path!=null ?
                   <img className="w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
-                  <img className="w-[240px]" src={`/poster.jpg`} alt={movie.title} />
+                  <img className="w-[240px] h-[355px] object-cover" src={`/no_poster.webp`} alt="" />
                   }
                 </Link>
               </div>

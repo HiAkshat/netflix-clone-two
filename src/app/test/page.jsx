@@ -3,10 +3,9 @@ import styles from "./styles.module.css"
 import Navbar from "@/components/navbar/navbar"
 import Image from "next/image"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
 // import getMovieData, {getMovieCreditsData, getMovieRecData, getMovieSimilarData} from "@/api/getMovieData";
 import Link from "next/link";
-
+import TrailerButton from "@/components/trailerButton/trailerButton";
 const bodyStyle = {
   // background: "url('/backdrop.jpg')"
 }
@@ -50,10 +49,8 @@ export default function Page({params}){
 </p>
           </div>
 
-          <div className="flex items-center gap-[12px] max-w-fit">
-            <div><PlayArrowRoundedIcon fontSize="large"/></div>
-            <span className="text-[24px]">Watch Trailer</span>
-          </div>
+          <TrailerButton />
+
         </div>
       </div>
 
