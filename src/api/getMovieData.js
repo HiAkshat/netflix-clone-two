@@ -43,4 +43,13 @@ async function getMovieVideoData(movie_id) {
   return res.json()
 }
 
-export {getMovieCreditsData, getMovieRecData, getMovieSimilarData, getMovieVideoData}
+async function getMovieSearchData(query) {
+  const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=395a62dc9950940cae420e402cb02179&query=${query}`)
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  
+  return res.json()
+}
+
+export {getMovieCreditsData, getMovieRecData, getMovieSimilarData, getMovieVideoData, getMovieSearchData}
