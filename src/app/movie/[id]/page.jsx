@@ -4,16 +4,25 @@ import Navbar from "@/components/navbar/navbar"
 import Image from "next/image"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
+import getMovieData, {getMovieCreditsData, getMovieRecData, getMovieSimilarData} from "@/api/getMovieData";
+import Link from "next/link";
 
 const bodyStyle = {
   // background: "url('/backdrop.jpg')"
 }
 
-export default function Page(){
+export default async function Page({params}){
+  const data = await getMovieData(params.id)
+  const creditsData = await getMovieCreditsData(params.id)
+  const recData = await getMovieRecData(params.id)
+  const similarData = await getMovieSimilarData(params.id)
+
+  const directors = creditsData.crew.filter(person => person.job==="Director").map(person => person.name).join(", ")
+
   return (
-    <div style={bodyStyle} className="flex flex-col gap-[50px]">
+    <div style={bodyStyle} className="flex flex-col gap-[50px] mb-[50px]">
       <Navbar />
-      <img className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]" src="/backdrop.jpg" alt="" />
+      <img className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="" />
       <div className={`${styles.gradA}`}></div>
       <div className={`${styles.gradB}`}></div>
 
@@ -24,24 +33,26 @@ export default function Page(){
 
       <div className="flex gap-[65px]">
         <div className="w-[300px]">
-          <img className="w-[300px]" src="/poster.jpg" alt="" />
+          <img className="w-[300px]" src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} alt="" />
         </div>
 
         <div className="flex flex-col max-w-[925px] gap-[53px]">
           <div className="flex flex-col gap-[10px]">
-            <div className="flex items-end gap-[20px]">
-              <span className="text-[64px] font-black leading-[50px]">Interstellar</span>
-              <span className="text-[24px] font-bold text-[#DDD] leading-[23px]">2014</span>
-              <span className="text-[24px] text-[#DDD] leading-[23px]">Directed by <span className="font-bold">Christopher Nolan</span></span>
+            <div className="flex items-end gap-[20px] flex-wrap">
+              <span className="text-[64px] font-black leading-[50px]">{data.original_title}</span>
+              <div className="flex items-end gap-[20px]">
+                <span className="text-[24px] font-bold text-[#DDD] leading-[23px]">{data.release_date.split("-")[0]}</span>
+                <span className="text-[24px] text-[#DDD] leading-[23px]">Directed by <span className="font-bold">{directors}</span></span>
+              </div>
             </div>
             
             <div>
-              <span className="italic text-[24px] text-[#DDD]">Mankind was born on Earth. It was never meant to die here.</span>
+              <span className="italic text-[24px] text-[#DDD]">{data.tagline}</span>
             </div>
           </div>
 
           <div>
-            <p className="text-[24px] leading-[30px]">The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.</p>
+            <p className="text-[24px] leading-[30px]">{data.overview}</p>
           </div>
 
           <div className="flex items-center gap-[12px] max-w-fit">
@@ -53,49 +64,54 @@ export default function Page(){
 
       <div className="flex flex-col gap-[20px]">
         <span className="font-bold text-[48px]">Cast</span>
-        <div className="flex gap-[50px]">
-          <div className="flex flex-col gap-[15px] w-[155px]">
-            <div className="w-[155px] h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden"><img className="object-" src="/actor.jpg" alt="" /></div>
-            <span className="text-center text-[16px]">Matthew McConaughey</span>
-          </div>
-          <div className="flex flex-col gap-[15px] w-[155px]">
-            <div className="w-[155px] h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden"><img className="object-" src="/actor.jpg" alt="" /></div>
-            <span className="text-center text-[16px]">Matthew McConaughey</span>
-          </div>
-          <div className="flex flex-col gap-[15px] w-[155px]">
-            <div className="w-[155px] h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden"><img className="object-" src="/actor.jpg" alt="" /></div>
-            <span className="text-center text-[16px]">Matthew McConaughey</span>
-          </div>
-          <div className="flex flex-col gap-[15px] w-[155px]">
-            <div className="w-[155px] h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden"><img className="object-" src="/actor.jpg" alt="" /></div>
-            <span className="text-center text-[16px]">Matthew McConaughey</span>
-          </div>
-          <div className="flex flex-col gap-[15px] w-[155px]">
-            <div className="w-[155px] h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden"><img className="object-" src="/actor.jpg" alt="" /></div>
-            <span className="text-center text-[16px]">Matthew McConaughey</span>
-          </div>
+        <div className={`${styles.noScrollbar} flex gap-[50px] overflow-x-scroll`}>
+          {creditsData.cast.map(actor => (
+            <div key={actor.id} className="flex flex-col gap-[15px] w-[155px]">
+              <div className="w-[155px] h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden"><img src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} alt="" /></div>
+              <div className="flex flex-col gap-1">
+                <span className="text-center text-[16px]">{actor.name}</span>
+                <span className="text-center text-[14px] text-[#DDD]">{actor.character}</span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 
-      <div className="flex flex-col gap-[20px]">
-        <span className="font-bold text-[48px]">If you like Interstellar</span>
-        <div className="flex gap-[50px]">
-          <img className="w-[240px]" src="/poster.jpg" alt="" />
-          <img className="w-[240px]" src="/poster.jpg" alt="" />
-          <img className="w-[240px]" src="/poster.jpg" alt="" />
-          <img className="w-[240px]" src="/poster.jpg" alt="" />
+      {recData.results.length != 0 &&
+        <div className="flex flex-col gap-[20px]">
+          <span className="font-bold text-[48px]">If you like {data.title}</span>
+          <div className={`${styles.noScrollbar} flex gap-[50px] overflow-x-scroll`}>
+            {recData.results.slice(0, 10).map(movie => (
+              <div className="min-w-[240px]">
+                <Link href={`/movie/${movie.id}`}>
+                  {movie.poster_path!=null ?
+                  <img className="w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
+                  <img className="w-[240px]" src={`/poster.jpg`} alt="" />
+                  }
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      }
 
-      <div className="flex flex-col gap-[20px]">
-        <span className="font-bold text-[48px]">Similar</span>
-        <div className="flex gap-[50px]">
-          <img className="w-[240px]" src="/poster.jpg" alt="" />
-          <img className="w-[240px]" src="/poster.jpg" alt="" />
-          <img className="w-[240px]" src="/poster.jpg" alt="" />
-          <img className="w-[240px]" src="/poster.jpg" alt="" />
+      {similarData.results.length != 0 &&
+        <div className="flex flex-col gap-[20px]">
+          <span className="font-bold text-[48px]">Similar</span>
+          <div className={`${styles.noScrollbar} flex gap-[50px] overflow-x-scroll`}>
+            {similarData.results.slice(0, 10).map(movie => (
+              <div className="min-w-[240px]">
+                <Link href={`/movie/${movie.id}`}>
+                  {movie.poster_path!=null ?
+                  <img className="w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
+                  <img className="w-[240px]" src={`/poster.jpg`} alt={movie.title} />
+                  }
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      }
     </div>
   )
 }
