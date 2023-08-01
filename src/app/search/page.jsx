@@ -7,7 +7,7 @@ import {getMovieSearchData} from "@/api/getMovieData";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export default async function Page() {
+export default function Page() {
   // const router = useRouter()
   const [data, setData] = useState()
 
@@ -33,7 +33,7 @@ export default async function Page() {
       {data && 
         <div className="grid grid-cols-4 gap-[50px] items-center">
           {data.results.map(movie => (
-            <Link href={`/movie/${movie.id}`}>
+            <Link key={movie.id} href={`/movie/${movie.id}`}>
               {movie.poster_path ?
               <img className="w-[240px] m-auto" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt="" /> :
               <img className="w-[240px] m-auto" src={`/no_poster.jpg`} alt="" />
