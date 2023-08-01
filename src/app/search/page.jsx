@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default async function Page() {
-  const router = useRouter()
+  // const router = useRouter()
   const [data, setData] = useState()
 
   const handleSubmit = async (event) => {

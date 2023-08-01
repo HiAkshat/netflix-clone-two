@@ -43,7 +43,7 @@ export default async function Page({params}){
         <div className="flex flex-1 flex-col max-w-[925px] gap-[53px]">
           <div className="flex flex-col gap-[25px] lg:gap-[20px]">
             <div className="flex items-end gap-[20px] flex-wrap">
-              <span className="text-[48px] lg:text-[64px] font-black leading-[50px]">{data.original_title}</span>
+              <span className="text-[48px] lg:text-[64px] font-black leading-[50px]">{data.title}</span>
               <div className="flex flex-col lg:flex-row lg:items-end gap-[10px] lg:gap-[20px]">
                 <span className="text-[24px] font-bold text-[#DDD] leading-[23px]">{data.release_date.split("-")[0]}</span>
                 <span className="text-[24px] text-[#DDD] leading-[23px]">Directed by <span className="font-bold">{directors}</span></span>
