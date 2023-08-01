@@ -21,17 +21,17 @@ export default function Page() {
   };
 
   return (
-    <div className="flex flex-col gap-[50px] pb-[50px]">
+    <div className="flex flex-col gap-[30px] md:gap-[50px] pb-[50px]">
       <Navbar />
-      <div className="flex items-center gap-[25px] w-full h-[80px] bg-[#1B1A1A] rounded-2xl pl-[45px]">
+      <div className="flex items-center gap-[15px] md:gap-[25px] w-full h-[60px] md:h-[80px] bg-[#1B1A1A] rounded-2xl pl-[20px] md:pl-[45px]">
         <div className="text-[#D9D9D9]"><SearchIcon fontSize="large"/></div>
         <form onSubmit={handleSubmit}>
-          <input name="myInputName" className="text-[24px] text-[#D9D9D9] outline-none bg-[rgba(0,0,0,0)]" type="text" placeholder="Search for a movie.."/>
+          <input name="myInputName" className="text-[20px] md:text-[24px] text-[#D9D9D9] outline-none bg-[rgba(0,0,0,0)]" type="text" placeholder="Search for a movie.."/>
         </form>
       </div>
 
       {data && 
-        <div className="grid grid-cols-4 gap-[50px] items-center">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-[50px] items-center">
           {data.results.map(movie => (
             <Link key={movie.id} href={`/movie/${movie.id}`}>
               {movie.poster_path ?
