@@ -14,3 +14,9 @@ body{
   background-color: #080808;
   color: white;
 }
+
+@media screen and (max-width: 640px) {
+  body{
+    padding: 0 40px;
+  }
+}

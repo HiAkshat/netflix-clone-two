@@ -25,25 +25,26 @@ export default async function Page({params}){
       <img className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="" />
       <div className={`${styles.gradA}`}></div>
       <div className={`${styles.gradB}`}></div>
+      <div className={`${styles.gradC}`}></div>
 
-      <div className="flex items-center gap-[12px] text-[#DDD] cursor-pointer">
+      {/* <div className="flex items-center gap-[12px] text-[#DDD] cursor-pointer">
         <div><ArrowBackIosNewIcon fontSize="large"/></div>
         <div className="text-[20px]">Search Results</div>
-      </div>
+      </div> */}
 
-      <div className="flex gap-[65px]">
-        <div className="w-[300px]">
+      <div className="flex flex-2 flex-col lg:flex-row gap-[65px]">
+        <div className="w-full lg:w-[300px]">
           {data.poster_path ?
-          <img className="w-[300px]" src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} alt="" /> :
-          <img className="w-[300px]" src={`/no_poster.webp`} alt="" />
+          <img className="m-auto lg:m-0 w-[300px]" src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} alt="" /> :
+          <img className="m-auto lg:m-0 w-[300px]" src={`/no_poster.webp`} alt="" />
           }
         </div>
 
-        <div className="flex flex-col max-w-[925px] gap-[53px]">
-          <div className="flex flex-col gap-[10px]">
+        <div className="flex flex-1 flex-col max-w-[925px] gap-[53px]">
+          <div className="flex flex-col gap-[25px] lg:gap-[20px]">
             <div className="flex items-end gap-[20px] flex-wrap">
-              <span className="text-[64px] font-black leading-[50px]">{data.original_title}</span>
-              <div className="flex items-end gap-[20px]">
+              <span className="text-[48px] lg:text-[64px] font-black leading-[50px]">{data.original_title}</span>
+              <div className="flex flex-col lg:flex-row lg:items-end gap-[10px] lg:gap-[20px]">
                 <span className="text-[24px] font-bold text-[#DDD] leading-[23px]">{data.release_date.split("-")[0]}</span>
                 <span className="text-[24px] text-[#DDD] leading-[23px]">Directed by <span className="font-bold">{directors}</span></span>
               </div>
@@ -70,14 +71,14 @@ export default async function Page({params}){
       </div>
 
       <div className="flex flex-col gap-[20px]">
-        <span className="font-bold text-[48px]">Cast</span>
+        <span className="font-bold text-[36px] md:text-[48px]">Cast</span>
         <div className={`${styles.noScrollbar} flex gap-[50px] overflow-x-scroll`}>
           {creditsData.cast.map(actor => (
             <div key={actor.id} className="flex flex-col gap-[15px] w-[155px]">
-              <div className="w-[155px] h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden"><img src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} alt="" /></div>
+              <div className="w-[100px] h-[100px] md:w-[155px] md:h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden"><img src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} alt="" /></div>
               <div className="flex flex-col gap-1">
-                <span className="text-center text-[16px]">{actor.name}</span>
-                <span className="text-center text-[14px] text-[#DDD]">{actor.character}</span>
+                <span className="text-center text-[14px] md:text-[16px]">{actor.name}</span>
+                <span className="text-center text-[12px] md:text-[14px] text-[#DDD]">{actor.character}</span>
               </div>
             </div>
           ))}
@@ -86,14 +87,14 @@ export default async function Page({params}){
 
       {recData.results.length != 0 &&
         <div className="flex flex-col gap-[20px]">
-          <span className="font-bold text-[48px]">If you like {data.title}</span>
+          <span className="font-bold text-[36px] md:text-[48px]">If you like {data.title}</span>
           <div className={`${styles.noScrollbar} flex gap-[50px] overflow-x-scroll`}>
             {recData.results.slice(0, 10).map(movie => (
               <div className="min-w-fit">
                 <Link href={`/movie/${movie.id}`}>
                   {movie.poster_path!=null ?
-                  <img className="w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
-                  <img className="w-[240px] h-[355px] object-cover" src={`/no_poster.webp`} alt="" />
+                  <img className="w-[200px] md:w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
+                  <img className="w-[200px] md:w-[240px] h-[300px] md:h-[355px] object-cover" src={`/no_poster.webp`} alt="" />
                   }
                 </Link>
               </div>
@@ -104,14 +105,14 @@ export default async function Page({params}){
 
       {similarData.results.length != 0 &&
         <div className="flex flex-col gap-[20px]">
-          <span className="font-bold text-[48px]">Similar</span>
+          <span className="font-bold text-[36px] md:text-[48px]">Similar</span>
           <div className={`${styles.noScrollbar} flex gap-[50px] overflow-x-scroll`}>
             {similarData.results.slice(0, 10).map(movie => (
               <div className="min-w-[240px]">
                 <Link href={`/movie/${movie.id}`}>
                   {movie.poster_path!=null ?
-                  <img className="w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
-                  <img className="w-[240px] h-[355px] object-cover" src={`/no_poster.webp`} alt="" />
+                  <img className="w-[200px] md:w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
+                  <img className="w-[200px] md:w-[240px] h-[300px] md:h-[355px] object-cover" src={`/no_poster.webp`} alt="" />
                   }
                 </Link>
               </div>
