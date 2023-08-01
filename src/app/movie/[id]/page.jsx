@@ -108,7 +108,7 @@ export default async function Page({params}){
           <span className="font-bold text-[36px] md:text-[48px]">Similar</span>
           <div className={`${styles.noScrollbar} flex gap-[50px] overflow-x-scroll`}>
             {similarData.results.slice(0, 10).map(movie => (
-              <div key={movie.id} className="min-w-[240px]">
+              <div key={movie.id} className="min-w-fit">
                 <Link href={`/movie/${movie.id}`}>
                   {movie.poster_path!=null ?
                   <img className="w-[200px] md:w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
