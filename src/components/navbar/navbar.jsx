@@ -3,6 +3,7 @@
 import Image from "next/image";
 import SearchIcon from '@mui/icons-material/Search';
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Navbar() {
   const router = useRouter()
@@ -16,9 +17,11 @@ export default function Navbar() {
   return (
     <div className="flex justify-between">
       <div className="hidden md:flex gap-[50px] items-center top-0 left-0">
-        <div className="relative w-[169px] h-[45px]">
-          <Image className="object-contain" src="/logo.png" fill />
-        </div>
+        <Link href="/">
+          <div className="relative w-[169px] h-[45px]">
+            <Image className="object-contain" src="/logo.png" fill />
+          </div>
+        </Link>
         <div className="flex gap-[30px]">
           <span>Movies</span>
           <span>Series</span>

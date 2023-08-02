@@ -1,22 +1,16 @@
-// import LoadingHome from "./loading"
-
-// async function getData() {
-//   const res = await fetch('https://jsonplaceholder.typicode.com/posts')
-//   if (!res.ok) {
-//     throw new Error('Failed to fetch data')
-//   }
-  
-//   console.log("HEY")
-//   return res.json()
-// }
+import Navbar from "@/components/navbar/navbar"
+import MovieList from "@/components/movieList/movieList"
+import { discoverMovie } from "@/api/getMovieData"
 
 export default async function Home() {
-  // const data = await getData()
-  // if (!data) return <LoadingHome />
-
+  const query="avengers"
+  const pageNum = "1"
+  const popularMovies= await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
+  console.log(`https://api.themoviedb.org/3/search/movie?query=${query}&page=${pageNum}&api_key=${process.env.API_KEY}`)
   return (
-    <main className="">
-      jjjj
+    <main className="flex flex-col gap-[50px]">
+      <Navbar />
+      <MovieList heading="Popular right now" listData={popularMovies.results} />
     </main>
   )
 }

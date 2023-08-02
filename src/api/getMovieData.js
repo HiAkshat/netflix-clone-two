@@ -44,7 +44,7 @@ async function getMovieVideoData(movie_id) {
 }
 
 async function getMovieSearchData(query, pageNum) {
-  const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=395a62dc9950940cae420e402cb02179&query=${query}&page=${pageNum}`)
+  const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&page=${pageNum}&api_key=395a62dc9950940cae420e402cb02179`)
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -52,4 +52,22 @@ async function getMovieSearchData(query, pageNum) {
   return res.json()
 }
 
-export {getMovieCreditsData, getMovieRecData, getMovieSimilarData, getMovieVideoData, getMovieSearchData}
+async function discoverMovie(query){
+  const res = await fetch(query)
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  
+  return res.json()
+}
+
+async function getPersonData(person_id) {
+  const res = await fetch(`https://api.themoviedb.org/3/person/${person_id}?language=en-US&api_key=${process.env.API_KEY}`)
+  if (!res.ok) {
+    throw new Error('Failed to fetch data')
+  }
+  
+  return res.json()
+}
+
+export {getMovieCreditsData, getMovieRecData, getMovieSimilarData, getMovieVideoData, getMovieSearchData, discoverMovie, getPersonData}
