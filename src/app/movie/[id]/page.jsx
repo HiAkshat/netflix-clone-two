@@ -80,7 +80,7 @@
           <span className="font-bold text-[36px] md:text-[48px]">Cast</span>
           <div className={`${styles.noScrollbar} flex gap-[0px] md:gap-[50px] overflow-x-scroll`}>
             {creditsData.cast.map(actor => (
-              <Link className="" href={`/cast/${actor.id}`}>
+              <Link key={actor.id} className="" href={`/cast/${actor.id}`}>
                 <div key={actor.id} className="flex flex-col items-center gap-[15px] w-[155px]">
                   <div className={`${styles.Hover} w-[100px] h-[100px] md:w-[155px] md:h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden`}><img src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} alt={actor.name} /></div>
                   <div className="flex flex-col gap-1">
