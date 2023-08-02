@@ -6,6 +6,7 @@ import { useState } from "react";
 import {getMovieSearchData} from "@/api/getMovieData";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import styles from "./styles.module.css"
 
 export default function Page() {
   // const router = useRouter()
@@ -35,8 +36,8 @@ export default function Page() {
           {data.results.map(movie => (
             <Link key={movie.id} href={`/movie/${movie.id}`}>
               {movie.poster_path ?
-              <img className="w-[240px] m-auto" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt="" /> :
-              <img className="w-[240px] m-auto" src={`/no_poster.jpg`} alt="" />
+              <img className={`${styles.onHover} w-[240px] m-auto`} src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
+              <img className={`${styles.onHover} w-[240px] m-auto`} src={`/no_poster.webp`}  />
               }
             </Link>
           ))}

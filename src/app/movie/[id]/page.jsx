@@ -35,7 +35,7 @@ export default async function Page({params}){
       <div className="flex flex-2 flex-col lg:flex-row gap-[65px]">
         <div className="w-full lg:w-[300px]">
           {data.poster_path ?
-          <img className="m-auto lg:m-0 w-[300px]" src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} alt="" /> :
+          <img className="m-auto lg:m-0 w-[300px]" src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} alt={data.title} /> :
           <img className="m-auto lg:m-0 w-[300px]" src={`/no_poster.webp`} alt="" />
           }
         </div>
@@ -72,10 +72,10 @@ export default async function Page({params}){
 
       <div className="flex flex-col gap-[20px]">
         <span className="font-bold text-[36px] md:text-[48px]">Cast</span>
-        <div className={`${styles.noScrollbar} flex gap-[50px] overflow-x-scroll`}>
+        <div className={`${styles.noScrollbar} flex p-6 gap-[50px] overflow-x-scroll`}>
           {creditsData.cast.map(actor => (
             <div key={actor.id} className="flex flex-col gap-[15px] w-[155px]">
-              <div className="w-[100px] h-[100px] md:w-[155px] md:h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden"><img src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} alt="" /></div>
+              <div className={`${styles.Hover} w-[100px] h-[100px] md:w-[155px] md:h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden`}><img src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} alt={actor.name} /></div>
               <div className="flex flex-col gap-1">
                 <span className="text-center text-[14px] md:text-[16px]">{actor.name}</span>
                 <span className="text-center text-[12px] md:text-[14px] text-[#DDD]">{actor.character}</span>
@@ -88,16 +88,14 @@ export default async function Page({params}){
       {recData.results.length != 0 &&
         <div className="flex flex-col gap-[20px]">
           <span className="font-bold text-[36px] md:text-[48px]">If you like {data.title}</span>
-          <div className={`${styles.noScrollbar} flex gap-[50px] overflow-x-scroll`}>
+          <div className={`${styles.noScrollbar} flex p-6 gap-[50px] overflow-x-scroll`}>
             {recData.results.slice(0, 10).map(movie => (
-              <div key={movie.id} className="min-w-fit">
-                <Link href={`/movie/${movie.id}`}>
-                  {movie.poster_path!=null ?
-                  <img className="w-[200px] md:w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
-                  <img className="w-[200px] md:w-[240px] h-[300px] md:h-[355px] object-cover" src={`/no_poster.webp`} alt="" />
-                  }
-                </Link>
-              </div>
+              <Link key={movie.id} className={`${styles.onHover}`} href={`/movie/${movie.id}`}>
+                {movie.poster_path!=null ?
+                <img className={`min-w-[200px] md:min-w-[240px]`} src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
+                <img className="min-w-[200px] md:min-w-[240px] min-h-[300px] md:min-h-[355px] object-cover" src={`/no_poster.webp`} alt={movie.title} title={movie.title} />
+                }
+              </Link>
             ))}
           </div>
         </div>
@@ -106,16 +104,14 @@ export default async function Page({params}){
       {similarData.results.length != 0 &&
         <div className="flex flex-col gap-[20px]">
           <span className="font-bold text-[36px] md:text-[48px]">Similar</span>
-          <div className={`${styles.noScrollbar} flex gap-[50px] overflow-x-scroll`}>
+          <div className={`${styles.noScrollbar} flex p-6 gap-[50px] overflow-x-scroll`}>
             {similarData.results.slice(0, 10).map(movie => (
-              <div key={movie.id} className="min-w-fit">
-                <Link href={`/movie/${movie.id}`}>
-                  {movie.poster_path!=null ?
-                  <img className="w-[200px] md:w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
-                  <img className="w-[200px] md:w-[240px] h-[300px] md:h-[355px] object-cover" src={`/no_poster.webp`} alt="" />
-                  }
-                </Link>
-              </div>
+              <Link key={movie.id} className={`${styles.onHover}`} href={`/movie/${movie.id}`}>
+                {movie.poster_path!=null ?
+                <img className="min-w-[200px] md:min-w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
+                <img className="min-w-[200px] md:min-w-[240px] min-h-[300px] md:min-h-[355px] object-cover" src={`/no_poster.webp`} alt="" />
+                }
+              </Link>
             ))}
           </div>
         </div>

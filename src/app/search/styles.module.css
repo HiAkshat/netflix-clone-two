@@ -1,0 +1,7 @@
+.onHover{
+  transition: all 0.2s ease;
+}
+
+.onHover:hover{
+  transform: scale(1.1);
+}
