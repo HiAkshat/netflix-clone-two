@@ -4,8 +4,9 @@ import Navbar from "@/components/navbar/navbar"
 import Image from "next/image"
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
-import getMovieData, {getMovieCreditsData, getMovieRecData, getMovieSimilarData} from "@/api/getMovieData";
+import getMovieData, {getMovieCreditsData, getMovieRecData, getMovieSimilarData, getMovieVideoData} from "@/api/getMovieData";
 import Link from "next/link";
+import MovieList from "@/components/movieList/movieList";
 
 const bodyStyle = {
   // background: "url('/backdrop.jpg')"
@@ -16,6 +17,9 @@ export default async function Page({params}){
   const creditsData = await getMovieCreditsData(params.id)
   const recData = await getMovieRecData(params.id)
   const similarData = await getMovieSimilarData(params.id)
+
+  const vidData = await getMovieVideoData(params.id)
+  const videoAvailable = vidData.results.find(video => video.type==="Trailer")
 
   const directors = creditsData.crew.filter(person => person.job==="Director").map(person => person.name).join(", ")
 
@@ -46,7 +50,7 @@ export default async function Page({params}){
               <span className="text-[48px] lg:text-[64px] font-black leading-[50px]">{data.title}</span>
               <div className="flex flex-col lg:flex-row lg:items-end gap-[10px] lg:gap-[20px]">
                 <span className="text-[24px] font-bold text-[#DDD] leading-[23px]">{data.release_date.split("-")[0]}</span>
-                <span className="text-[24px] text-[#DDD] leading-[23px]">Directed by <span className="font-bold">{directors}</span></span>
+                {directors!="" && <span className="text-[24px] text-[#DDD] leading-[23px]">Directed by <span className="font-bold">{directors}</span></span>}
               </div>
             </div>
             
@@ -59,12 +63,14 @@ export default async function Page({params}){
             <p className="text-[24px] leading-[30px]">{data.overview}</p>
           </div>
 
-          <Link href={`/movie/${params.id}/trailer`}>
-            <div className="flex items-center gap-[12px] max-w-fit">
-              <div><PlayArrowRoundedIcon fontSize="large"/></div>
-              <span className="text-[24px]">Watch Trailer</span>
-            </div>
-          </Link>
+          {videoAvailable &&
+            <Link href={`/movie/${params.id}/trailer`}>
+              <div className="flex items-center gap-[12px] max-w-fit">
+                <div><PlayArrowRoundedIcon fontSize="large"/></div>
+                <span className="text-[24px]">Watch Trailer</span>
+              </div>
+            </Link>
+          }
         </div>
 
 
@@ -72,7 +78,7 @@ export default async function Page({params}){
 
       <div className="flex flex-col gap-[20px]">
         <span className="font-bold text-[36px] md:text-[48px]">Cast</span>
-        <div className={`${styles.noScrollbar} flex p-6 gap-[50px] overflow-x-scroll`}>
+        <div className={`${styles.noScrollbar} flex gap-[50px] overflow-x-scroll`}>
           {creditsData.cast.map(actor => (
             <div key={actor.id} className="flex flex-col gap-[15px] w-[155px]">
               <div className={`${styles.Hover} w-[100px] h-[100px] md:w-[155px] md:h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden`}><img src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} alt={actor.name} /></div>
@@ -86,35 +92,11 @@ export default async function Page({params}){
       </div>
 
       {recData.results.length != 0 &&
-        <div className="flex flex-col gap-[20px]">
-          <span className="font-bold text-[36px] md:text-[48px]">If you like {data.title}</span>
-          <div className={`${styles.noScrollbar} flex p-6 gap-[50px] overflow-x-scroll`}>
-            {recData.results.slice(0, 10).map(movie => (
-              <Link key={movie.id} className={`${styles.onHover}`} href={`/movie/${movie.id}`}>
-                {movie.poster_path!=null ?
-                <img className={`min-w-[200px] md:min-w-[240px]`} src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
-                <img className="min-w-[200px] md:min-w-[240px] min-h-[300px] md:min-h-[355px] object-cover" src={`/no_poster.webp`} alt={movie.title} title={movie.title} />
-                }
-              </Link>
-            ))}
-          </div>
-        </div>
+        <MovieList heading={`If you like ${data.title}`} listData={recData.results.slice(0, 10)} />
       }
 
       {similarData.results.length != 0 &&
-        <div className="flex flex-col gap-[20px]">
-          <span className="font-bold text-[36px] md:text-[48px]">Similar</span>
-          <div className={`${styles.noScrollbar} flex p-6 gap-[50px] overflow-x-scroll`}>
-            {similarData.results.slice(0, 10).map(movie => (
-              <Link key={movie.id} className={`${styles.onHover}`} href={`/movie/${movie.id}`}>
-                {movie.poster_path!=null ?
-                <img className="min-w-[200px] md:min-w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
-                <img className="min-w-[200px] md:min-w-[240px] min-h-[300px] md:min-h-[355px] object-cover" src={`/no_poster.webp`} alt="" />
-                }
-              </Link>
-            ))}
-          </div>
-        </div>
+        <MovieList heading="Similar" listData={similarData.results.slice(0, 10)} />
       }
     </div>
   )

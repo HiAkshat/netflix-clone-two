@@ -43,8 +43,8 @@ async function getMovieVideoData(movie_id) {
   return res.json()
 }
 
-async function getMovieSearchData(query) {
-  const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=395a62dc9950940cae420e402cb02179&query=${query}`)
+async function getMovieSearchData(query, pageNum) {
+  const res = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=395a62dc9950940cae420e402cb02179&query=${query}&page=${pageNum}`)
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
