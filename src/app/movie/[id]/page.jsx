@@ -61,7 +61,7 @@
 
             {videoAvailable &&
               <Link href={`/movie/${params.id}/trailer`}>
-                <div className="flex items-center gap-[12px] max-w-fit">
+                <div className="flex items-center gap-[12px] max-w-fit rounded-2xl bg-[rgba(63,63,63,0.5)] p-3 pr-6">
                   <div><PlayArrowRoundedIcon fontSize="large"/></div>
                   <span className="text-[24px]">Watch Trailer</span>
                 </div>
@@ -72,12 +72,12 @@
 
         </div>
 
-        <div className="flex flex-col gap-[20px]">
+        <div className="flex flex-col gap-[10px] md:gap-[20px]">
           <span className="font-bold text-[36px] md:text-[48px]">Cast</span>
-          <div className={`${styles.noScrollbar} flex gap-[0px] md:gap-[50px] overflow-x-scroll`}>
+          <div className={`${styles.noScrollbar} flex overflow-x-scroll`}>
             {creditsData.cast.map(actor => (
               <Link key={actor.id} className="" href={`/cast/${actor.id}`}>
-                <div key={actor.id} className="flex flex-col items-center gap-[15px] w-[155px]">
+                <div key={actor.id} className="flex flex-col items-center gap-[15px] rounded-2xl hover:bg-[rgba(63,63,63,0.5)] p-8">
                   <div className={`${styles.Hover} w-[100px] h-[100px] md:w-[155px] md:h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden`}><img src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} alt={actor.name} /></div>
                   <div className="flex flex-col gap-1">
                     <span className="text-center text-[14px] md:text-[16px]">{actor.name}</span>
