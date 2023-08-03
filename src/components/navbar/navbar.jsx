@@ -29,10 +29,10 @@ export default function Navbar() {
           <span>Popular</span>
         </div>
       </div>
-      <div className="mt-[30px] md:mt-0 flex gap-[10px] items-center w-full md:max-w-[235px] h-[45px] pl-4 bg-[rgba(255,255,255,0.15)] rounded-full">
+      <div className="mt-[30px] md:mt-0 flex gap-[10px] items-center w-full md:max-w-[235px] h-[45px] pl-4 bg-[rgba(0,0,0,0.45)] rounded-full">
         <div><SearchIcon /></div>
         <form onSubmit={handleSubmit}>
-          <input name="myInputName" type="text" placeholder="Search for a movie.." className="bg-transparent w-[90%] pr-4 outline-none"/>
+          <input name="myInputName" type="text" placeholder="Search for a movie.." className="bg-transparent w-[90%] pr-4 outline-none text-white"/>
         </form>
       </div>
     </div>
