@@ -4,7 +4,6 @@ import { Skeleton } from "@/components/ui/skeleton"
 export default function Loading() {
   return (
     <div className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
-      <Navbar />
 
       <div className="flex flex-2 flex-col lg:flex-row gap-[65px]">
         <Skeleton className="m-auto lg:m-0 w-[300px] h-[450px] rounded-none" />
