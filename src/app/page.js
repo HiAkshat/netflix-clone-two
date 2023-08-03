@@ -16,6 +16,9 @@ export default async function Home() {
   const animatedMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=16&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
   const docMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=99&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
   const comedyMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=35&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
+  const horrorMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=27&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
+  const scifiMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=878&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
+  const familyMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=10751&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
   
 
   // FEATURED MOVIE LOGIC
@@ -49,7 +52,7 @@ export default async function Home() {
       <div className={`${styles.gradA}`}></div>
       <div className={`${styles.gradC}`}></div>
 
-      <div className="absolute top-[200px] flex flex-col gap-[20px] w-[600px]">
+      <div className="absolute top-[200px] flex flex-col gap-[20px] w-[80%] lg:w-[600px]">
         <div className="w-fit h-[150px]">
           <img className={`${styles.featuredImg} object-contain w-full h-full`} src={`https://image.tmdb.org/t/p/original/${randomMovieImgs.logos[0].file_path}`} />
         </div>
@@ -71,12 +74,15 @@ export default async function Home() {
       </div>
 
 
-      <div className="flex flex-col gap-[50px] mt-[65vh]">
+      <div className="flex flex-col gap-[50px] mt-[500px] md:mt-[450px]">
         <MovieList heading="Popular right now" listData={popularMovies.results} />
         <MovieList heading="Indian movies" listData={indianMovies.results} />
         <MovieList heading="Animated movies" listData={animatedMovies.results} />
         <MovieList heading="Documentaries" listData={docMovies.results} />
         <MovieList heading="Comedies" listData={comedyMovies.results} />
+        <MovieList heading="Horror films" listData={horrorMovies.results} />
+        <MovieList heading="Sci-fi movies" listData={scifiMovies.results} />
+        <MovieList heading="Watch with your Family" listData={familyMovies.results} />
       </div>
     </main>
   )
