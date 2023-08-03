@@ -8,10 +8,6 @@
   import Link from "next/link";
   import MovieList from "@/components/movieList/movieList";
 
-  const bodyStyle = {
-    // background: "url('/backdrop.jpg')"
-  }
-
   export default async function Page({params}){
     const data = await getMovieData(params.id)
     const creditsData = await getMovieCreditsData(params.id)
@@ -24,7 +20,7 @@
     const directors = creditsData.crew.filter(person => person.job==="Director").map(person => person.name).join(", ")
 
     return (
-      <div style={bodyStyle} className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
+      <div className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
         <Navbar />
         <img className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="" />
         <div className={`${styles.gradA}`}></div>
