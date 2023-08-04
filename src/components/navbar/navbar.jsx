@@ -15,21 +15,23 @@ export default function Navbar() {
   };
 
   return (
-    <div className="flex justify-between">
-      <div className="hidden md:flex gap-[50px] items-center top-0 left-0">
+    <div className="flex justify-between  ">
+      <div className="flex gap-[20px] md:gap-[50px] items-center">
         <Link href="/">
-          <div className="relative w-[169px] h-[45px]">
+          <div className="relative w-[100px] md:w-[169px] h-[45px]">
             <Image className="object-contain" src="/logo.png" fill />
           </div>
         </Link>
-        <div className="flex gap-[30px]">
-          <span>Movies</span>
-          <span>Series</span>
-          <span>New</span>
-          <span>Popular</span>
+
+        <div className="hidden md:flex gap-[30px]">
+          <span className="textShadow">Movies</span>
+          <span className="textShadow">Series</span>
+          <span className="textShadow">New</span>
+          <span className="textShadow">Popular</span>
         </div>
       </div>
-      <div className="mt-[30px] md:mt-0 flex gap-[10px] items-center w-full md:max-w-[235px] h-[45px] pl-4 bg-[rgba(70,70,70,0.5)] rounded-full">
+
+      <div className="flex gap-[10px] featuredImg items-center md:max-w-[235px] h-[45px] pl-4 bg-[rgba(63,63,63,0.5)] rounded-full">
         <div><SearchIcon /></div>
         <form onSubmit={handleSubmit}>
           <input name="myInputName" type="text" placeholder="Search for a movie.." className="bg-transparent w-[90%] pr-4 outline-none text-white"/>

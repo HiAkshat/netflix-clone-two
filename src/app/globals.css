@@ -93,6 +93,7 @@ body{
 @media screen and (max-width: 640px) {
   body{
     padding: 0 20px;
+    padding-top: 20px;
   }
 }
 
@@ -128,4 +129,12 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px rgb(52, 52, 52) inset !important;
     -webkit-text-fill-color: white !important;
+}
+
+.textShadow{
+  text-shadow: 4px 4px 7px rgba(0,0,0,0.6);
+}
+
+.featuredImg{
+  filter: drop-shadow(4px 4px 7px rgba(0,0,0,0.6));;
 }
