@@ -24,10 +24,10 @@ export default function Navbar() {
         </Link>
 
         <div className="hidden md:flex gap-[30px]">
-          <span className="textShadow">Movies</span>
-          <span className="textShadow">Series</span>
-          <span className="textShadow">New</span>
-          <span className="textShadow">Popular</span>
+          <Link href={`/`}><span className="textShadow">Home</span></Link>
+          <Link href={`/Popular`}><span className="textShadow">Popular</span></Link>
+          <Link href={`/New`}><span className="textShadow">New</span></Link>
+          <Link href={`/Top Rated`}><span className="textShadow">Top Rated</span></Link>
         </div>
       </div>
 
