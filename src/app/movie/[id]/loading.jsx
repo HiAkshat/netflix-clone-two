@@ -6,7 +6,7 @@ export default function Loading() {
     <div className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
       <Navbar />
 
-      <div className="flex flex-2 flex-col lg:flex-row gap-[65px]">
+      <div className="flex flex-2 flex-col lg:flex-row gap-[65px] mt-[100px] md:mt-[150px]">
         <Skeleton className="opacity-30 m-auto lg:m-0 w-[300px] h-[450px] rounded-none" />
         <div className="flex flex-1 flex-col max-w-[925px] gap-[53px]">
           <div className="flex flex-col gap-[25px] lg:gap-[20px]">

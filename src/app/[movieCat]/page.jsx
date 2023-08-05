@@ -34,7 +34,9 @@ export default async function Page({params}) {
   return (
     <div className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
       <Navbar />
-      <MovieGrid heading={`${decodeURIComponent(params.movieCat)} Movies`} listData={data.results} />
+      <div className="mt-[100px] md:mt-[130px]">
+        <MovieGrid heading={`${decodeURIComponent(params.movieCat)} Movies`} listData={data.results} />
+      </div>
     </div>
   )
 }
