@@ -60,7 +60,15 @@
             </div>
 
             {videoAvailable &&
-              <Link href={`/movie/${params.id}/trailer`}>
+              <Link 
+                href={{
+                  pathname: `/movie/${params.id}/trailer`,
+                  query: {
+                    backdrop: `https://image.tmdb.org/t/p/original/${data.backdrop_path}`,
+                    videoId: vidData.results.find(video => video.type==="Trailer").key
+                  }
+                }}
+              >
                 <div className="flex items-center gap-[12px] max-w-fit rounded-2xl bg-[rgba(63,63,63,0.5)] p-3 pr-6">
                   <div><PlayArrowRoundedIcon fontSize="large"/></div>
                   <span className="text-[24px]">Watch Trailer</span>
