@@ -15,11 +15,17 @@ export default function Navbar() {
   };
 
   return (
-    <div className="flex justify-between  ">
-      <div className="flex gap-[20px] md:gap-[50px] items-center">
+    <div className="flex justify-between">
+      <div className="flex gap-[20px] md:gap-[30px] items-center">
         <Link href="/">
-          <div className="relative w-[100px] md:w-[169px] h-[45px]">
+          <div className="hidden md:inline-block md:relative md:w-[169px] h-[45px]">
             <Image className="object-contain" src="/logo.png" fill />
+          </div>
+        </Link>
+
+        <Link href="/">
+          <div className="relative inline-block md:hidden w-[45px] h-[45px]">
+            <Image className="object-contain object-left" src="/n.png" fill />
           </div>
         </Link>
 
@@ -31,7 +37,7 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="flex gap-[10px] featuredImg items-center md:max-w-[235px] h-[45px] pl-4 bg-[rgba(63,63,63,0.5)] rounded-full">
+      <div className="flex gap-[10px] featuredImg items-center w-max md:max-w-[235px] h-[45px] pl-4 bg-[rgba(63,63,63,0.5)] rounded-full">
         <div><SearchIcon /></div>
         <form onSubmit={handleSubmit}>
           <input name="myInputName" type="text" placeholder="Search for a movie.." className="bg-transparent w-[90%] pr-4 outline-none text-white"/>
