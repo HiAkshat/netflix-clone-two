@@ -30,7 +30,7 @@ export default async function Page({params}) {
     <div className="flex flex-col gap-[30px] md:gap-[50px] pb-[50px]">
       <Navbar />
 
-      <div className="flex flex-col gap-[10px]">
+      <div className="flex flex-col gap-[10px] mt-[100px] md:mt-[150px]">
         <span className="text-[40px]">Showing search results for {decodeURIComponent(params.query)}</span>
         <span className="text-[20px] text-[#D9D9D9]">Page {data.page} of {data.total_pages}</span>
       </div>

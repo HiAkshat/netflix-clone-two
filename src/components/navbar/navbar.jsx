@@ -4,6 +4,10 @@ import Image from "next/image";
 import SearchIcon from '@mui/icons-material/Search';
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useState, useEffect, useCallback } from "react";
+import useScroll from './useScroll.js';
+import styles from "./styles.module.css"
+
 
 export default function Navbar() {
   const router = useRouter()
@@ -14,11 +18,17 @@ export default function Navbar() {
     router.push(`/search/${inputValue}`)
   };
 
+  const isAtTop = useScroll();
+
+  useEffect(()=>{
+    console.log(isAtTop)
+  }, [isAtTop])
+  
   return (
-    <div className="flex justify-between">
-      <div className="flex gap-[20px] md:gap-[30px] items-center">
+    <div className={`fixed w-full left-0 z-[999] flex justify-between p-[20px] md:py-[20px] md:px-[40px] xl:px-[60px] transition-all duration-500 ease-in-out ${!isAtTop && styles.navbarScrolled}`}>
+      <div className="flex gap-[20px] md:gap-[30px] ">
         <Link href="/">
-          <div className="hidden md:inline-block md:relative md:w-[169px] h-[45px]">
+          <div className="hidden md:inline-block md:relative md:w-[140px] h-full ">
             <Image className="object-contain" src="/logo.png" fill />
           </div>
         </Link>
@@ -29,7 +39,7 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <div className="hidden md:flex gap-[30px]">
+        <div className="hidden md:flex items-center gap-[30px] ">
           <Link href={`/`}><span className="textShadow">Home</span></Link>
           <Link href={`/Popular`}><span className="textShadow">Popular</span></Link>
           <Link href={`/New`}><span className="textShadow">New</span></Link>

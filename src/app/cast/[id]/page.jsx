@@ -11,7 +11,7 @@ export default async function Page({params}){
     <div className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
       <Navbar />
 
-      <div className="flex flex-2 flex-col lg:flex-row gap-[65px]">
+      <div className="flex flex-2 flex-col lg:flex-row gap-[65px] mt-[100px] md:mt-[150px]">
         <div className="w-full lg:w-[300px]">
           <div className="w-[300px] h-[300px] rounded-full overflow-hidden m-auto">
             {data.profile_path ?

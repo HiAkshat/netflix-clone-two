@@ -52,7 +52,7 @@ export default async function Home() {
       <div className={`${styles.gradA}`}></div>
       <div className={`${styles.gradC}`}></div>
 
-      <div className="flex flex-col mt-[50px] gap-[20px] w-[80%] lg:w-[600px]">
+      <div className="flex flex-col mt-[150px] gap-[20px] w-[80%] lg:w-[600px]">
         <div className="w-fit h-[150px]">
           <img className={`${styles.featuredImg} object-contain w-full h-full`} src={`https://image.tmdb.org/t/p/original/${randomMovieImgs.logos[0].file_path}`} />
         </div>

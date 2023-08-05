@@ -84,7 +84,7 @@ body{
   max-width: 100%;
   max-width: 1440px;
   padding: 0 40px;
-  padding-top: 40px;
+  /* padding-top: 40px; */
   margin: 0 auto;
   background-color: #080808;
   color: white;
@@ -93,7 +93,7 @@ body{
 @media screen and (max-width: 640px) {
   body{
     padding: 0 20px;
-    padding-top: 20px;
+    /* padding-top: 20px; */
   }
 }
 

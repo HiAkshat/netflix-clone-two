@@ -32,7 +32,7 @@
           <div className="text-[20px]">Search Results</div>
         </div> */}
 
-        <div className="flex flex-2 flex-col lg:flex-row gap-[65px]">
+        <div className="flex flex-2 flex-col lg:flex-row gap-[65px] mt-[100px] md:mt-[150px]">
           <div className="w-full lg:w-[300px]">
             {data.poster_path ?
             <img className="m-auto lg:m-0 w-[300px]" src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} alt={data.title} /> :
