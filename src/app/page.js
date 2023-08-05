@@ -29,7 +29,8 @@ export default async function Home() {
 
   const currentDate = new Date();
   const currentHour = currentDate.getHours();
-  const randomMovie = popularMovies.results[currentHour%20]
+  console.log(currentHour)
+  const randomMovie = popularMovies.results[currentHour%10]
   const randomMovieData = await getMovieData(randomMovie.id)
   const randomMovieImgs = await discoverMovie(`https://api.themoviedb.org/3/movie/${randomMovie.id}/images?api_key=${process.env.API_KEY}`)
 
