@@ -46,13 +46,13 @@ export default async function Home() {
   const randomMovieOverview = sliceTextAtFirstFullStop(randomMovieData.overview)
 
   return (
-    <main className="flex flex-col gap-[50px]">
+    <main className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
       <Navbar />
       <img className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]" src={`https://image.tmdb.org/t/p/original/${randomMovie.backdrop_path}`} alt="" />
       <div className={`${styles.gradA}`}></div>
       <div className={`${styles.gradC}`}></div>
 
-      <div className="absolute top-[200px] flex flex-col gap-[20px] w-[80%] lg:w-[600px]">
+      <div className="flex flex-col mt-[50px] gap-[20px] w-[80%] lg:w-[600px]">
         <div className="w-fit h-[150px]">
           <img className={`${styles.featuredImg} object-contain w-full h-full`} src={`https://image.tmdb.org/t/p/original/${randomMovieImgs.logos[0].file_path}`} />
         </div>
@@ -74,7 +74,7 @@ export default async function Home() {
       </div>
 
 
-      <div className="flex flex-col gap-[50px] mt-[500px] md:mt-[450px]">
+      <div className="flex flex-col gap-[50px]">
         <MovieList heading="Popular right now" listData={popularMovies.results} />
         <MovieList heading="Indian movies" listData={indianMovies.results} />
         <MovieList heading="Animated movies" listData={animatedMovies.results} />

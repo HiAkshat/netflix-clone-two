@@ -19,7 +19,7 @@ export default function Navbar() {
       <div className="flex gap-[20px] md:gap-[30px] items-center">
         <Link href="/">
           <div className="hidden md:inline-block md:relative md:w-[169px] h-[45px]">
-            <Image className="object-contain" src="/logo.png" fill />
+            <Image className="object-contain featuredImg" src="/logo.png" fill />
           </div>
         </Link>
 
