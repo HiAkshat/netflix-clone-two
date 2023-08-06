@@ -3,6 +3,14 @@ import { getPersonData, discoverMovie } from "@/api/getMovieData";
 import Link from "next/link";
 import MovieGrid from "@/components/movieGrid/movieGrid";
 
+export async function generateMetadata({ params, searchParams }, parent) {
+  const data = await getPersonData(params.id)
+
+  return {
+    title: `${data.name} - AkG's Netflix`,
+  }
+}
+
 export default async function Page({params}){
   const data = await getPersonData(params.id)
   const movies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}&language=en-US&sort_by=popularity.desc&with_cast=${params.id}`)

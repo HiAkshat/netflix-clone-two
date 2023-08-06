@@ -23,6 +23,12 @@ let today = new Date()
 let todayStr = formatDate(today)
 let before = formatDate(addMonths(today, -2))
 
+export async function generateMetadata({ params, searchParams }, parent) {
+  return {
+    title: `${decodeURIComponent(params.movieCat)} - AkG's Netflix`,
+  }
+}
+
 export default async function Page({params}) {
   let data
   // sort_by=primary_release_date.desc

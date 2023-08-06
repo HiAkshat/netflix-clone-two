@@ -8,6 +8,14 @@
   import Link from "next/link";
   import MovieList from "@/components/movieList/movieList";
 
+  export async function generateMetadata({ params, searchParams }, parent) {
+    const data = await getMovieData(params.id)
+  
+    return {
+      title: `${data.title} - AkG's Netflix`,
+    }
+  }
+
   export default async function Page({params}){
     const data = await getMovieData(params.id)
     const creditsData = await getMovieCreditsData(params.id)

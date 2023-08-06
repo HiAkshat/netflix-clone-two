@@ -1,5 +1,3 @@
-"use client"
-
 import Navbar from "@/components/navbar/navbar"
 import {getMovieSearchData} from "@/api/getMovieData";
 import Link from "next/link";
@@ -7,6 +5,13 @@ import { useRouter } from "next/navigation";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import MovieGrid from "@/components/movieGrid/movieGrid";
+
+export async function generateMetadata({ params, searchParams }, parent) {
+  return {
+    title: `${decodeURIComponent(params.query)} - AkG's Netflix`,
+  }
+}
+
 
 export default async function Page({params}) {
   const data = await getMovieSearchData(params.query, params.pageNum)
