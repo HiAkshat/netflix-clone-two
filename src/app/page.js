@@ -1,6 +1,6 @@
 import Navbar from "@/components/navbar/navbar"
 import MovieList from "@/components/movieList/movieList"
-import { discoverMovie } from "@/api/getMovieData"
+import { discoverMovie, getFeaturedMovie } from "@/api/getMovieData"
 import getMovieData from "@/api/getMovieData"
 import styles from "./styles.module.css"
 
@@ -19,52 +19,28 @@ export default async function Home() {
   const horrorMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=27&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
   const scifiMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=878&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
   const familyMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=10751&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
-  
-
-  // FEATURED MOVIE LOGIC
-
-  // function getRandomNumber(min, max) {
-  //   return Math.floor(Math.random() * (max - min + 1)) + min;
-  // }
-
-  const currentDate = new Date();
-  const currentHour = currentDate.getHours();
-  console.log(currentHour)
-  const randomMovie = popularMovies.results[currentHour%10]
-  const randomMovieData = await getMovieData(randomMovie.id)
-  const randomMovieImgs = await discoverMovie(`https://api.themoviedb.org/3/movie/${randomMovie.id}/images?api_key=${process.env.API_KEY}`)
-
-  function sliceTextAtFirstFullStop(text) {
-    const firstFullStopIndex = text.indexOf('. ');
-    if (firstFullStopIndex !== -1) {
-      return text.slice(0, firstFullStopIndex + 1); // Include the full stop in the result
-    } else {
-      return text; // If no full stop is found, return the original text
-    }
-  }
-
-  const randomMovieOverview = sliceTextAtFirstFullStop(randomMovieData.overview)
+  const featuredMovie = await getFeaturedMovie()
 
   return (
     <main className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
       <Navbar />
-      <img className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]" src={`https://image.tmdb.org/t/p/original/${randomMovie.backdrop_path}`} alt="" />
+      <img className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]" src={`https://image.tmdb.org/t/p/original/${featuredMovie.backdrop}`} alt="" />
       <div className={`${styles.gradA}`}></div>
       <div className={`${styles.gradC}`}></div>
 
       <div className="flex flex-col mt-[150px] gap-[20px] w-[80%] lg:w-[600px]">
         <div className="w-fit h-[150px]">
-          <img className={`${styles.featuredImg} object-contain w-full h-full`} src={`https://image.tmdb.org/t/p/original/${randomMovieImgs.logos[0].file_path}`} />
+          <img className={`${styles.featuredImg} object-contain w-full h-full`} src={`https://image.tmdb.org/t/p/original/${featuredMovie.logo}`} />
         </div>
-        <span className={`${styles.featuredText} text-lg`}>{randomMovieOverview}</span>
+        <span className={`${styles.featuredText} text-lg`}>{featuredMovie.overview}</span>
         <div className="flex items-center">
-          <Link href={`/movie/${randomMovie.id}/trailer`}>
+          <Link href={`/movie/${featuredMovie.id}/trailer`}>
             <div className="flex items-center bg-white px-6 py-3 m-2 ml-0 mr-6 rounded-lg text-[#080808] cursor-pointer">
               <PlayArrowIcon />
               <span className="text-xl font-medium pl-1">Play</span>
             </div>
           </Link>
-          <Link href={`/movie/${randomMovie.id}`}>
+          <Link href={`/movie/${featuredMovie.id}`}>
             <div className="flex items-center bg-[rgba(255,255,255,0.3)] px-6 py-3 m-4 ml-0 rounded-lg text-white cursor-pointer">
               <InfoIcon />
               <span className="text-xl font-medium pl-1">Info</span>
