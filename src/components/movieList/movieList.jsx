@@ -8,8 +8,8 @@ export default function MovieList({heading, listData}){
       {listData.map(movie => (
         <Link key={movie.id} className="onHover" href={`/movie/${movie.id}`}>
           {movie.poster_path!=null ?
-          <img className={`max-w-[200px] md:max-w-[240px]`} src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
-          <img className="max-w-[200px] md:max-w-[240px] max-h-[300px] md:max-h-[355px] object-cover" src={`/no_poster.webp`} alt={movie.title} title={movie.title} />
+          <img className="max-w-[200px] md:max-w-[240px]" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
+          <img className="max-w-[200px] md:max-w-[240px]" src={`/no_poster.png`} alt={movie.title} title={movie.title} />
           }
         </Link>
       ))}

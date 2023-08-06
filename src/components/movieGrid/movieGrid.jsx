@@ -9,7 +9,7 @@ export default function MovieGrid({heading, listData}) {
           <Link key={movie.id} href={`/movie/${movie.id}`}>
             {movie.poster_path ?
             <img className="onHover w-[240px] m-auto" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title} /> :
-            <img className="onHover w-[240px] m-auto" src={`/no_poster.webp`}  />
+            <img className="onHover w-[240px] m-auto" src={`/no_poster.png`}  />
             }
           </Link>
         ))}

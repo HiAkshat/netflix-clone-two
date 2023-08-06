@@ -24,7 +24,7 @@ export default async function Page({params}){
           <div className="w-[300px] h-[300px] rounded-full overflow-hidden m-auto">
             {data.profile_path ?
             <img className="object-cover" src={`https://image.tmdb.org/t/p/original/${data.profile_path}`} alt={data.name} /> :
-            <img className="object-cover" src={`/no_poster.webp`} alt="" />
+            <img className="object-contain" src={`/no_photo.png`} alt="" />
             }
           </div>
         </div>
