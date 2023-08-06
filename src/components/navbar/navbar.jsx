@@ -50,7 +50,7 @@ export default function Navbar() {
 
 
       <div className="flex items-center gap-[30px]">
-        <div className="flex gap-[10px] featuredImg items-center w-max md:max-w-[235px] h-[45px] pl-4 bg-[rgba(63,63,63,0.5)] rounded-full">
+        <div className="flex gap-[10px] featuredImg items-center min-w-min md:max-w-[235px] h-[45px] pl-4 bg-[rgba(63,63,63,0.5)] rounded-full">
           <div><SearchIcon /></div>
           <form onSubmit={handleSubmit}>
             <input name="myInputName" type="text" placeholder="Search for a movie.." className="bg-transparent w-[90%] pr-4 outline-none text-white"/>
