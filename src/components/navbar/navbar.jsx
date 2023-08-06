@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import useScroll from './useScroll.js';
 import styles from "./styles.module.css"
-
+import HamMenu from "../hamMenu/hamMenu.jsx";
 
 export default function Navbar() {
   const router = useRouter()
@@ -39,7 +39,8 @@ export default function Navbar() {
           </div>
         </Link>
 
-        <div className="hidden md:flex items-center gap-[30px] ">
+
+        <div className="hidden md:flex gap-[30px] items-center">
           <Link href={`/`}><span className="textShadow">Home</span></Link>
           <Link href={`/Popular`}><span className="textShadow">Popular</span></Link>
           <Link href={`/New`}><span className="textShadow">New</span></Link>
@@ -47,11 +48,16 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="flex gap-[10px] featuredImg items-center w-max md:max-w-[235px] h-[45px] pl-4 bg-[rgba(63,63,63,0.5)] rounded-full">
-        <div><SearchIcon /></div>
-        <form onSubmit={handleSubmit}>
-          <input name="myInputName" type="text" placeholder="Search for a movie.." className="bg-transparent w-[90%] pr-4 outline-none text-white"/>
-        </form>
+
+      <div className="flex items-center gap-[30px]">
+        <div className="flex gap-[10px] featuredImg items-center w-max md:max-w-[235px] h-[45px] pl-4 bg-[rgba(63,63,63,0.5)] rounded-full">
+          <div><SearchIcon /></div>
+          <form onSubmit={handleSubmit}>
+            <input name="myInputName" type="text" placeholder="Search for a movie.." className="bg-transparent w-[90%] pr-4 outline-none text-white"/>
+          </form>
+        </div>
+
+        <HamMenu />
       </div>
     </div>
   )
