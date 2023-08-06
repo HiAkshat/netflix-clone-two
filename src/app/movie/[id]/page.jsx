@@ -77,7 +77,7 @@
                   }
                 }}
               >
-                <div className="flex items-center gap-[12px] max-w-fit rounded-2xl bg-[rgba(63,63,63,0.5)] p-3 pr-6">
+                <div className="flex items-center gap-[12px] max-w-fit rounded-2xl bg-[rgba(63,63,63,0.5)] hover:bg-[rgba(63,63,63,0.7)] p-3 pr-6">
                   <div><PlayArrowRoundedIcon fontSize="large"/></div>
                   <span className="text-[24px]">Watch Trailer</span>
                 </div>
