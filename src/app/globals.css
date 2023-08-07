@@ -131,6 +131,8 @@ input:-webkit-autofill:active{
     -webkit-text-fill-color: white !important;
 }
 
+/* Shadows */
+
 .textShadow{
   text-shadow: 4px 4px 7px rgba(0,0,0,0.6);
 }

@@ -71,10 +71,13 @@ async function getPersonData(person_id) {
 }
 
 async function getFeaturedMovie() {
-  const currentDate = new Date();
-  const currentHour = currentDate.getHours();
+  function getRandomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  // const currentDate = new Date();
+  // const currentHour = currentDate.getHours();
   const popularMovies= await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
-  const randomMovie = popularMovies.results[currentHour%10]
+  const randomMovie = popularMovies.results[getRandomNumber(1, 10)]
   const randomMovieData = await getMovieData(randomMovie.id)
   const randomMovieImgs = await discoverMovie(`https://api.themoviedb.org/3/movie/${randomMovie.id}/images?api_key=${process.env.API_KEY}`)
 

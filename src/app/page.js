@@ -35,13 +35,13 @@ export default async function Home() {
         <span className={`${styles.featuredText} text-lg`}>{featuredMovie.overview}</span>
         <div className="flex items-center">
           <Link href={`/movie/${featuredMovie.id}/trailer`}>
-            <div className="flex items-center bg-white px-6 py-3 m-2 ml-0 mr-6 rounded-lg text-[#080808] cursor-pointer">
+            <div className="flex items-center bg-white hover:bg-[#e6e6e6] px-6 py-3 m-2 ml-0 mr-6 rounded-lg text-[#080808] cursor-pointer">
               <PlayArrowIcon />
               <span className="text-xl font-medium pl-1">Play</span>
             </div>
           </Link>
           <Link href={`/movie/${featuredMovie.id}`}>
-            <div className="flex items-center bg-[rgba(255,255,255,0.3)] px-6 py-3 m-4 ml-0 rounded-lg text-white cursor-pointer">
+            <div className="flex items-center bg-[rgba(255,255,255,0.3)] hover:bg-[rgba(255,255,255,0.35)] px-6 py-3 m-4 ml-0 rounded-lg text-white cursor-pointer">
               <InfoIcon />
               <span className="text-xl font-medium pl-1">Info</span>
             </div>

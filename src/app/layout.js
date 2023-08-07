@@ -15,7 +15,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <link rel="icon" href="/nn.ico" sizes="any" />
       <body>{children}</body>
     </html>
   )
