@@ -77,7 +77,9 @@ async function getFeaturedMovie() {
   // const currentDate = new Date();
   // const currentHour = currentDate.getHours();
   const popularMovies= await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
-  const randomMovie = popularMovies.results[getRandomNumber(1, 10)]
+  const randomNum = getRandomNumber(1, 10)
+  console.log(randomNum)
+  const randomMovie = popularMovies.results[randomNum]
   const randomMovieData = await getMovieData(randomMovie.id)
   const randomMovieImgs = await discoverMovie(`https://api.themoviedb.org/3/movie/${randomMovie.id}/images?api_key=${process.env.API_KEY}`)
 
@@ -85,7 +87,7 @@ async function getFeaturedMovie() {
     const firstFullStopIndex = text.indexOf('. ');
     if (firstFullStopIndex !== -1) {
       return text.slice(0, firstFullStopIndex + 1); // Include the full stop in the result
-    } else {
+    } else {  
       return text; // If no full stop is found, return the original text
     }
   }
