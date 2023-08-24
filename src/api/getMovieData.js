@@ -1,5 +1,5 @@
 export default async function getMovieData(movie_id) {
-  const res = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${process.env.API_KEY}`)
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${process.env.API_KEY}`, { cache: 'no-store' })
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -8,7 +8,7 @@ export default async function getMovieData(movie_id) {
 }
 
 async function getMovieCreditsData(movie_id) {
-  const res = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${process.env.API_KEY}`)
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=${process.env.API_KEY}`, { cache: 'no-store' })
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -17,7 +17,7 @@ async function getMovieCreditsData(movie_id) {
 }
 
 async function getMovieRecData(movie_id) {
-  const res = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=${process.env.API_KEY}`)
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=${process.env.API_KEY}`, { cache: 'no-store' })
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -26,7 +26,7 @@ async function getMovieRecData(movie_id) {
 }
 
 async function getMovieSimilarData(movie_id) {
-  const res = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/similar?api_key=${process.env.API_KEY}`)
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/similar?api_key=${process.env.API_KEY}`, { cache: 'no-store' })
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -35,7 +35,7 @@ async function getMovieSimilarData(movie_id) {
 }
 
 async function getMovieVideoData(movie_id) {
-  const res = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.API_KEY}`)
+  const res = await fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=${process.env.API_KEY}`, { cache: 'no-store' })
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -44,7 +44,7 @@ async function getMovieVideoData(movie_id) {
 }
 
 async function getMovieSearchData(query, pageNum) {
-  const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&page=${pageNum}&api_key=395a62dc9950940cae420e402cb02179`)
+  const res = await fetch(`https://api.themoviedb.org/3/search/movie?query=${query}&page=${pageNum}&api_key=395a62dc9950940cae420e402cb02179`, { cache: 'no-store' })
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -53,7 +53,7 @@ async function getMovieSearchData(query, pageNum) {
 }
 
 async function discoverMovie(query){
-  const res = await fetch(query)
+  const res = await fetch(query, { cache: 'no-store' })
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
@@ -62,7 +62,7 @@ async function discoverMovie(query){
 }
 
 async function getPersonData(person_id) {
-  const res = await fetch(`https://api.themoviedb.org/3/person/${person_id}?language=en-US&api_key=${process.env.API_KEY}`)
+  const res = await fetch(`https://api.themoviedb.org/3/person/${person_id}?language=en-US&api_key=${process.env.API_KEY}`, { cache: 'no-store' })
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
