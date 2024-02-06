@@ -16,11 +16,11 @@ export default function MovieList({heading, listData}){
     <span className="font-bold text-[36px] md:text-[48px]">{heading}</span>
     <div className="relative noScrollbar flex p-6 right-6 gap-5 lg:gap-6 overflow-x-scroll">
       {listData.map(movie => (
-        <motion.div whileHover={{
+        <motion.div key={movie.id} whileHover={{
           scale: 1.1,
         }}
         >
-          <Link key={movie.id} href={`/movie/${movie.id}`}>
+          <Link href={`/movie/${movie.id}`}>
             {movie.poster_path!=null ?
               <div className="relative w-[150px] h-[225px] lg:w-[220px] lg:h-[330px] rounded-xl">
                 <Skeleton className="absolute opacity-20 w-[150px] h-[225px] lg:w-[220px] lg:h-[330px] rounded-xl object-cover" />
