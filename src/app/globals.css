@@ -82,9 +82,7 @@
 body{
   font-family: 'Roboto', sans-serif;
   max-width: 100%;
-  max-width: 1440px;
-  padding: 0 40px;
-  /* padding-top: 40px; */
+  max-width: 1366px;
   margin: 0 auto;
   background-color: #080808;
   color: white;
@@ -92,29 +90,12 @@ body{
 
 @media screen and (max-width: 640px) {
   body{
-    padding: 0 20px;
+    /* background-color: antiquewhite; */
+    /* margin-left: 20px; */
+    padding: 0 15px;
     /* padding-top: 20px; */
   }
 }
-
-.noScrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.noScrollbar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
-
-  mask-image: linear-gradient(
-    to right,
-    /* hsl(0 0% 0% / 0), */
-    hsl(0 0% 0% / 1) 10%,
-    hsl(0 0% 0% / 1) 90%,
-    hsl(0 0% 0% / 0)
-  );
-}
-
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 

@@ -25,10 +25,10 @@ export default async function Home() {
   return (
     <main className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
       <Navbar />
-      <div className="absolute top-20 lg:top-0 left-0 object-cover w-full h-[95vh] z-[-1] overflow-hidden">
+      <div className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1] overflow-hidden">
         {videoID ?
           <div>
-            <iframe className="hidden md:block w-full h-[40vh] lg:h-[95vh] scale-[2] lg:scale-150 z-[-2]" src={`https://www.youtube.com/embed/${videoID}?&autoplay=1&mute=1&loop=1&si=hnw56FhXsYGRDLgI&amp;controls=0`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe className="hidden md:block w-full h-[40vh] lg:h-[95vh] scale-[2] lg:scale-150 z-[-2]" src={`https://www.youtube.com/embed/${videoID}?&autoplay=1&mute=1&loop=1&playlist=${videoID}&si=hnw56FhXsYGRDLgI&amp;controls=0`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             <Image fill className="md:hidden object-cover object-top" src={`https://image.tmdb.org/t/p/original/${featuredMovie.backdrop}`} alt="" />
           </div>
           :
@@ -39,8 +39,9 @@ export default async function Home() {
       <div className={`${styles.gradC}`}></div>
 
       <div className="flex flex-col mt-[150px] gap-[20px] w-[80%] lg:w-[600px]">
-        <div className="w-fit h-[150px]">
-          <img className={`${styles.featuredImg} object-contain w-full h-full`} src={`https://image.tmdb.org/t/p/original/${featuredMovie.logo}`} />
+        <div className="relative w-full h-[150px] lg:w-[600px] lg:h-[200px]">
+          <Image fill className={`${styles.featuredImg} object-contain object-left-bottom w-full h-full`} src={`https://image.tmdb.org/t/p/original/${featuredMovie.logo}`} /> 
+          {/* <img className={`${styles.featuredImg} object-contain w-full h-full`} src={`https://image.tmdb.org/t/p/original/${featuredMovie.logo}`} /> */}
         </div>
         <span className={`${styles.featuredText} text-lg`}>{featuredMovie.overview}</span>
         <div className="flex items-center">
