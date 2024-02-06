@@ -44,8 +44,8 @@ export default function Navbar() {
           }
 
           <Link className="flex items-center" href="/">
-            <div className="relative inline-block md:hidden w-[25px]">
-              <img className="object-contain" src="/n.png" fill />
+            <div className="relative inline-block md:hidden h-max w-[45px]">
+              <img className="object-contain" src="/a.png" fill />
             </div>
           </Link>
 
