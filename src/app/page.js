@@ -1,16 +1,15 @@
 import Navbar from "@/components/navbar/navbar"
 import MovieList from "@/components/movieList/movieList"
 import { discoverMovie, getFeaturedMovie } from "@/api/getMovieData"
-import getMovieData from "@/api/getMovieData"
+import {getMovieVideoData} from "@/api/getMovieData"
 import styles from "./styles.module.css"
 
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import InfoIcon from '@mui/icons-material/Info';
 import Link from "next/link"
+import Image from "next/image"
 
 export default async function Home() {
-  const query="avengers"
-  const pageNum = "1"
   const popularMovies= await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
   const indianMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_original_language=hi|kn|ml|ta|te&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
   const animatedMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=16&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
@@ -20,11 +19,22 @@ export default async function Home() {
   const scifiMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=878&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
   const familyMovies = await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&with_genres=10751&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
   const featuredMovie = await getFeaturedMovie()
+  const vidData = await getMovieVideoData(featuredMovie.id)
+  const videoID = vidData.results.find(video => video.type==="Trailer").key
 
   return (
     <main className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
       <Navbar />
-      <img className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]" src={`https://image.tmdb.org/t/p/original/${featuredMovie.backdrop}`} alt="" />
+      <div className="absolute top-20 lg:top-0 left-0 object-cover w-full h-[95vh] z-[-1] overflow-hidden">
+        {videoID ?
+          <div>
+            <iframe className="hidden md:block w-full h-[40vh] lg:h-[95vh] scale-[2] lg:scale-150 z-[-2]" src={`https://www.youtube.com/embed/${videoID}?&autoplay=1&mute=1&loop=1&si=hnw56FhXsYGRDLgI&amp;controls=0`} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <Image fill className="md:hidden object-cover object-top" src={`https://image.tmdb.org/t/p/original/${featuredMovie.backdrop}`} alt="" />
+          </div>
+          :
+          <Image fill className="object-cover object-top" src={`https://image.tmdb.org/t/p/original/${featuredMovie.backdrop}`} alt="" />
+        }
+      </div>
       <div className={`${styles.gradA}`}></div>
       <div className={`${styles.gradC}`}></div>
 
@@ -50,7 +60,7 @@ export default async function Home() {
       </div>
 
 
-      <div className="flex flex-col gap-[50px]">
+      <div className="flex flex-col gap-7">
         <MovieList heading="Popular right now" listData={popularMovies.results} />
         <MovieList heading="Indian movies" listData={indianMovies.results} />
         <MovieList heading="Animated movies" listData={animatedMovies.results} />
