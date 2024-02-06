@@ -10,6 +10,12 @@ import styles from "./styles.module.css"
 import HamMenu from "../hamMenu/hamMenu.jsx";
 
 export default function Navbar() {
+  const [isClient, setIsClient] = useState(false)
+ 
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   const router = useRouter()
 
   const handleSubmit = async (event) => {
@@ -27,17 +33,20 @@ export default function Navbar() {
   return (
     <div className={`fixed w-full left-0 z-[999] flex justify-between p-[20px] md:py-[20px] md:px-[40px] xl:px-[60px] transition-all duration-500 ease-in-out ${!isAtTop && styles.navbarScrolled}`}>
       <div className="flex gap-[20px] md:gap-[30px] ">
+
+        {isClient && 
+          <Link href="/">
+            <div className="hidden md:inline-block md:relative md:w-[140px] h-full ">
+              <img className="object-contain" src="/logo.png" fill />
+            </div>
+          </Link>
+        }
         <Link href="/">
-          <div className="hidden md:inline-block md:relative md:w-[140px] h-full ">
-            <Image className="object-contain" src="/logo.png" fill />
+          <div className="relative inline-block md:hidden w-[45px] h-[45px]">
+            <img className="object-contain object-left" src="/n.png" fill />
           </div>
         </Link>
 
-        <Link href="/">
-          <div className="relative inline-block md:hidden w-[45px] h-[45px]">
-            <Image className="object-contain object-left" src="/n.png" fill />
-          </div>
-        </Link>
 
 
         <div className="hidden md:flex gap-[30px] items-center">

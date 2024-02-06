@@ -7,6 +7,8 @@ import getMovieData, {getMovieCreditsData, getMovieRecData, getMovieSimilarData,
 import Link from "next/link";
 import MovieList from "@/components/movieList/movieList";
 import TrailerButton from "@/components/trailerButton/trailerButton";
+import MoviePoster from "@/components/moviePoster/moviePoster";
+import MovieCast from "@/components/movieCast/movieCast";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   const data = await getMovieData(params.id)
@@ -30,18 +32,16 @@ export default async function Page({params}){
   return (
     <div className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
       <Navbar />
-      <img className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="" />
+      <div className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]">
+        <Image fill className="object-cover" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="" />
+      </div>
+      {/* <img className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="" /> */}
       <div className={`${styles.gradA}`}></div>
       <div className={`${styles.gradB}`}></div>
       <div className={`${styles.gradC}`}></div>
 
       <div className="flex flex-2 flex-col lg:flex-row gap-[65px] mt-[100px] md:mt-[150px]">
-        <div className="w-full lg:w-[300px]">
-          {data.poster_path ?
-          <img className="m-auto lg:m-0 w-[300px]" src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} alt={data.title} /> :
-          <img className="m-auto lg:m-0 w-[300px]" src={`/no_poster.png`} alt="" />
-          }
-        </div>
+        <MoviePoster data={data} />
 
         <div className="flex flex-1 flex-col max-w-[925px] gap-[53px]">
           <div className="flex flex-col gap-[25px] lg:gap-[20px]">
@@ -70,27 +70,7 @@ export default async function Page({params}){
 
       </div>
 
-      <div className="flex flex-col gap-[10px] md:gap-[20px]">
-        <span className="font-bold text-[36px] md:text-[48px]">Cast</span>
-        <div className={`${styles.noScrollbar} flex overflow-x-scroll`}>
-          {creditsData.cast.map(actor => (
-            <Link key={actor.id} className="" href={`/cast/${actor.id}`}>
-              <div key={actor.id} className="flex flex-col items-center gap-[15px] rounded-2xl hover:bg-[rgba(63,63,63,0.5)] p-8">
-                <div className={`${styles.Hover} w-[100px] h-[100px] md:w-[155px] md:h-[155px] rounded-full bg-[#D9D9D9] overflow-hidden`}>
-                  {actor.profile_path ?
-                    <img src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} alt={actor.name} /> :
-                    <img src={`/no_photo.png`} alt="" />
-                  }
-                </div>
-                <div className="flex flex-col gap-1">
-                  <span className="text-center text-[14px] md:text-[16px]">{actor.name}</span>
-                  <span className="text-center text-[12px] md:text-[14px] text-[#DDD]">{actor.character}</span>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
+      <MovieCast creditsData={creditsData} />
 
       {recData.results.length != 0 &&
         <MovieList heading={`If you like ${data.title}`} listData={recData.results.slice(0, 10)} />

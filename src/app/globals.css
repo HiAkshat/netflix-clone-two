@@ -115,13 +115,6 @@ body{
   );
 }
 
-.onHover{
-  transition: all 0.2s ease;
-}
-
-.onHover:hover{
-  transform: scale(1.1);
-}
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -130,6 +123,25 @@ input:-webkit-autofill:active{
     -webkit-box-shadow: 0 0 0 30px rgb(52, 52, 52) inset !important;
     -webkit-text-fill-color: white !important;
 }
+
+.noScrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.noScrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+  mask-image: linear-gradient(
+    to right,
+    /* hsl(0 0% 0% / 0), */
+    hsl(0 0% 0% / 1) 10%,
+    hsl(0 0% 0% / 1) 90%,
+    hsl(0 0% 0% / 0)
+  );
+}
+
 
 /* Shadows */
 

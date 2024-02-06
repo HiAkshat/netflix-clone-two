@@ -21,14 +21,14 @@ export default function TrailerButton({movie_id, backdrop_path, vidData}) {
         <motion.div whileHover={{
           backgroundColor: "#FFFFFF",
           color: "#00000",
-          scale: 1.1
+          scale: 1.04
         }}
         
         transition={{
           type: "spring"
         }}
 
-        className="flex items-center gap-[12px] max-w-fit rounded-2xl p-3 pr-6">
+        className="flex items-center gap-[12px] max-w-fit rounded-2xl p-3 pr-6 bg-[#]">
           <div><PlayArrowRoundedIcon fontSize="large"/></div>
           <span className="text-[24px]">Watch Trailer</span>
         </motion.div>
