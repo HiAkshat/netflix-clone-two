@@ -8,6 +8,7 @@ import { useState, useEffect, useCallback } from "react";
 import useScroll from './useScroll.js';
 import styles from "./styles.module.css"
 import HamMenu from "../hamMenu/hamMenu.jsx";
+import Tab from "./tab/tab.jsx";
 
 export default function Navbar() {
   const [isClient, setIsClient] = useState(false)
@@ -50,10 +51,10 @@ export default function Navbar() {
           </Link>
 
           <div className="hidden md:flex gap-[30px] items-center min-w-max">
-            <Link href={`/`}><span className="textShadow">Home</span></Link>
-            <Link href={`/Popular`}><span className="textShadow">Popular</span></Link>
-            <Link href={`/New`}><span className="textShadow">New</span></Link>
-            <Link href={`/Top Rated`}><span className="textShadow">Top Rated</span></Link>
+            <Tab link={`/`} title={'Home'} />
+            <Tab link={`/Popular`} title={'Popular'} />
+            <Tab link={`/New`} title={'New'} />
+            <Tab link={`/Top Rated`} title={'Top Rated'} />
           </div>
         </div>
 

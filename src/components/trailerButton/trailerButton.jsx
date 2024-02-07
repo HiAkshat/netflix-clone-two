@@ -3,8 +3,11 @@
 import { motion } from "framer-motion"
 import Link from "next/link"
 import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded';
+import { useState } from "react";
 
 export default function TrailerButton({movie_id, backdrop_path, vidData}) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <motion.div whileHover={{
       
@@ -18,20 +21,23 @@ export default function TrailerButton({movie_id, backdrop_path, vidData}) {
           }
         }}
       >
-        <motion.div whileHover={{
-          backgroundColor: "#FFFFFF",
-          color: "#00000",
-          scale: 1.04
-        }}
-        
-        transition={{
-          type: "spring"
-        }}
+        <div className="flex relative items-center gap-[12px] max-w-fit rounded-2xl p-3 pr-6 bg-[#]">
+          <motion.div initial={{
+            scale: 0,
+          }}
 
-        className="flex items-center gap-[12px] max-w-fit rounded-2xl p-3 pr-6 bg-[#]">
-          <div><PlayArrowRoundedIcon fontSize="large"/></div>
-          <span className="text-[24px]">Watch Trailer</span>
-        </motion.div>
+          animate={{
+            scale: isHovered ? 1 : 0
+          }}
+
+          className="absolute left-0 z-[-1] w-[100%] h-[100%] bg-white rounded-full"></motion.div>
+          <motion.div
+            animate={{
+              color: isHovered ? "black" : "white"
+            }}
+          className="text-white" ><PlayArrowRoundedIcon fontSize="large"/></motion.div>
+          <motion.span whileHover={{color: "black"}} onMouseEnter={()=>setIsHovered(true)} onMouseLeave={()=>setIsHovered(false)} className="text-[24px]">Watch Trailer</motion.span>
+        </div>
       </Link>
     </motion.div>
   )
