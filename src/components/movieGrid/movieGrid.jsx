@@ -13,8 +13,8 @@ export default function MovieGrid({heading, listData}) {
         {listData.map(movie => (
           <motion.div whileHover={{
             scale: 1.1
-          }}>
-            <Link className="flex justify-center" key={movie.id} href={`/movie/${movie.id}`}>
+          }} key={movie.id}>
+            <Link className="flex justify-center" href={`/movie/${movie.id}`}>
               <div className="relative onHover w-[150px] h-[225px] lg:w-[220px] lg:h-[330px] rounded-xl">
                 <Skeleton className="absolute object-cover opacity-20  w-[150px] h-[225px] lg:w-[220px] lg:h-[330px] rounded-xl" />
                 {movie.poster_path ?
