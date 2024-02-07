@@ -32,10 +32,12 @@ export default async function Page({params}){
   return (
     <div className="flex flex-col gap-[30px] md:gap-[50px] mb-[50px]">
       <Navbar />
-      <div className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]">
-        <Image fill className="object-cover" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="" />
-      </div>
-      {/* <img className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="" /> */}
+
+      {data.backdrop_path &&
+        <div className="absolute top-0 left-0 object-cover w-full h-[95vh] z-[-1]">
+          <Image fill className="object-cover" src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`} alt="" />
+        </div>
+      }
       <div className={`${styles.gradA}`}></div>
       <div className={`${styles.gradB}`}></div>
       <div className={`${styles.gradC}`}></div>

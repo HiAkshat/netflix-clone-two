@@ -41,7 +41,6 @@ export default async function Home() {
       <div className="flex flex-col mt-[150px] gap-[20px] w-[80%] lg:w-[600px]">
         <div className="relative w-full h-[150px] lg:w-[600px] lg:h-[200px]">
           <Image fill className={`${styles.featuredImg} object-contain object-left-bottom w-full h-full`} src={`https://image.tmdb.org/t/p/original/${featuredMovie.logo}`} /> 
-          {/* <img className={`${styles.featuredImg} object-contain w-full h-full`} src={`https://image.tmdb.org/t/p/original/${featuredMovie.logo}`} /> */}
         </div>
         <span className={`${styles.featuredText} text-lg`}>{featuredMovie.overview}</span>
         <div className="flex items-center">

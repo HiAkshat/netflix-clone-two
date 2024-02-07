@@ -77,8 +77,7 @@ async function getFeaturedMovie() {
   // const currentDate = new Date();
   // const currentHour = currentDate.getHours();
   const popularMovies= await discoverMovie(`https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${process.env.API_KEY}`)
-  const randomNum = getRandomNumber(1, 10)
-  // console.log(randomNum)
+  const randomNum = getRandomNumber(0, 19)
   const randomMovie = popularMovies.results[randomNum]
   const randomMovieData = await getMovieData(randomMovie.id)
   const randomMovieImgs = await discoverMovie(`https://api.themoviedb.org/3/movie/${randomMovie.id}/images?api_key=${process.env.API_KEY}`)

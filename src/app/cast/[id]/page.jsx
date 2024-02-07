@@ -1,7 +1,7 @@
 import Navbar from "@/components/navbar/navbar"
 import { getPersonData, discoverMovie } from "@/api/getMovieData";
-import Link from "next/link";
 import MovieGrid from "@/components/movieGrid/movieGrid";
+import Image from "next/image";
 
 export async function generateMetadata({ params, searchParams }, parent) {
   const data = await getPersonData(params.id)
@@ -21,11 +21,14 @@ export default async function Page({params}){
 
       <div className="flex flex-2 flex-col lg:flex-row gap-[65px] mt-[100px] md:mt-[150px]">
         <div className="w-full lg:w-[300px]">
-          <div className="w-[300px] h-[300px] rounded-full overflow-hidden m-auto">
-            {data.profile_path ?
-            <img className="object-cover" src={`https://image.tmdb.org/t/p/original/${data.profile_path}`} alt={data.name} /> :
-            <img className="object-contain" src={`/no_photo.png`} alt="" />
-            }
+          <div className="relative w-[300px] h-[300px] rounded-full overflow-hidden m-auto">
+              <div>
+                {data.profile_path ?
+                  <Image fill className="object-cover object-center" src={`https://image.tmdb.org/t/p/original/${data.profile_path}`} alt={data.name}/>
+                  :
+                  <Image fill className="object-cover object-center" src={`/no_photo.png`} alt="" />
+                }
+              </div>
           </div>
         </div>
 

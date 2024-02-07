@@ -7,7 +7,7 @@ export default function MoviePoster({data}) {
         <div className="relative w-[300px] h-[450px] m-auto">
         {data.poster_path ?
           <Image fill className="m-auto lg:m-0 w-[300px] object-cover" src={`https://image.tmdb.org/t/p/original/${data.poster_path}`} alt={data.title} /> :
-          <Image fill className="m-auto lg:m-0 w-[300px] object-cover" src={`/no_poster.webp`} />
+          <Image fill className="m-auto lg:m-0 w-[300px] object-cover" src={`/no_poster.png`} />
         }
         </div>
       </div>
