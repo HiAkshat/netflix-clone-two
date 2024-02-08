@@ -13,10 +13,10 @@ export default function MovieGrid({heading, listData}) {
         {listData.map(movie => (
           <motion.div whileHover={{
             scale: 1.1
-          }} key={movie.id}>
-            <Link className="flex justify-center" href={`/movie/${movie.id}`}>
-              <div className="relative onHover w-[150px] h-[225px] lg:w-[220px] lg:h-[330px] rounded-xl">
-                <Skeleton className="absolute object-cover opacity-20  w-[150px] h-[225px] lg:w-[220px] lg:h-[330px] rounded-xl z-[-1]" />
+          }} key={movie.id} className="w-min">
+            <Link className="flex" href={`/movie/${movie.id}`}>
+              <div className="relative onHover w-[150px] h-[225px] lg:w-[220px] lg:h-[330px] rounded-xl overflow-hidden">
+                <Skeleton className="absolute object-cover opacity-20 bg-[#bfbfbf39]  w-[150px] h-[225px] lg:w-[220px] lg:h-[330px] rounded-xl z-[-1]" />
                 {movie.poster_path ?
                 <Image width={220} height={330} className="object-cover rounded-xl" src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={movie.title} title={movie.title}/>
                 :

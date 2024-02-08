@@ -21,7 +21,7 @@ export default function MovieCast({creditsData}) {
             <Link className="" href={`/cast/${actor.id}`}>
               <div className="flex flex-col h-full items-center gap-[15px] rounded-2xl p-6">
                 <div className={`relative w-[100px] h-[100px] md:w-[155px] md:h-[155px] rounded-full  overflow-hidden`}>
-                  <Skeleton className="absolute opacity-20 w-[100px] h-[100px] md:w-[155px] md:h-[155px] rounded-full" />
+                  <Skeleton className="absolute opacity-20 bg-[#bfbfbf39] w-[100px] h-[100px] md:w-[155px] md:h-[155px] rounded-full" />
                   {actor.profile_path ?
                     <Image fill className="object-cover object-center" src={`https://image.tmdb.org/t/p/original/${actor.profile_path}`} alt={actor.name} /> :
                     <Image fill src={`/no_photo.png`} alt="" />

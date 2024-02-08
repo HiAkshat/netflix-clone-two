@@ -35,54 +35,56 @@ export default async function Page({params}) {
     <div className="flex flex-col gap-[30px] md:gap-[50px] pb-[50px]">
       <Navbar />
 
-      <div className="flex flex-col gap-[10px] mt-[100px] md:mt-[150px]">
-        <span className="text-[40px]">Showing search results for {decodeURIComponent(params.query)}</span>
-        <span className="text-[20px] text-[#D9D9D9]">Page {data.page} of {data.total_pages}</span>
+      <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-[10px] mt-[100px] md:mt-[150px]">
+          <span className="text-[40px]">Showing search results for {decodeURIComponent(params.query)}</span>
+          <span className="text-[20px] text-[#D9D9D9]">Page {data.page} of {data.total_pages}</span>
+        </div>
+
+        {data.results.length!=0 ? 
+          <MovieGrid listData={data.results} />:
+          <span className="text-[48px]">No results found :&#40;</span>
+        }
+
+        {params.pageNum == 1 && params.pageNum == data.total_pages &&
+          <div className="w-full flex justify-end gap-[20px]">          
+            <div className="text-[#D9D9D9]"><ArrowBackIosNewIcon /></div>            
+            <div className="text-[#D9D9D9]"><ArrowForwardIosIcon /></div>
+          </div>
+        }
+
+        {params.pageNum == 1 && params.pageNum != data.total_pages &&
+          <div className="w-full flex justify-end gap-[20px]">
+            <div className="text-[#919090]"><ArrowBackIosNewIcon /></div>
+
+            <Link href={`${parseInt(params.pageNum)+1}`}>
+              <div><ArrowForwardIosIcon /></div>
+            </Link>
+          </div>
+        }
+
+        {params.pageNum != 1 && params.pageNum != data.total_pages &&
+          <div className="w-full flex justify-end gap-[20px]">          
+            <Link href={`${parseInt(params.pageNum)-1}`}>
+              <div><ArrowBackIosNewIcon /></div>
+            </Link>
+            
+            <Link href={`${parseInt(params.pageNum)+1}`}>
+              <div><ArrowForwardIosIcon /></div>
+            </Link>
+          </div>
+        }
+
+        {params.pageNum != 1 && params.pageNum == data.total_pages &&
+          <div className="w-full flex justify-end gap-[20px]">          
+            <Link href={`${parseInt(params.pageNum)-1}`}>
+              <div><ArrowBackIosNewIcon /></div>
+            </Link>
+            
+            <div className="text-[#919090]"><ArrowForwardIosIcon /></div>
+          </div>
+        }
       </div>
-
-      {data.results.length!=0 ? 
-        <MovieGrid listData={data.results} />:
-        <span className="text-[48px]">No results found :&#40;</span>
-      }
-
-      {params.pageNum == 1 && params.pageNum == data.total_pages &&
-        <div className="w-full flex justify-end gap-[20px]">          
-          <div className="text-[#D9D9D9]"><ArrowBackIosNewIcon /></div>            
-          <div className="text-[#D9D9D9]"><ArrowForwardIosIcon /></div>
-        </div>
-      }
-
-      {params.pageNum == 1 && params.pageNum != data.total_pages &&
-        <div className="w-full flex justify-end gap-[20px]">
-          <div className="text-[#919090]"><ArrowBackIosNewIcon /></div>
-
-          <Link href={`${parseInt(params.pageNum)+1}`}>
-            <div><ArrowForwardIosIcon /></div>
-          </Link>
-        </div>
-      }
-
-      {params.pageNum != 1 && params.pageNum != data.total_pages &&
-        <div className="w-full flex justify-end gap-[20px]">          
-          <Link href={`${parseInt(params.pageNum)-1}`}>
-            <div><ArrowBackIosNewIcon /></div>
-          </Link>
-          
-          <Link href={`${parseInt(params.pageNum)+1}`}>
-            <div><ArrowForwardIosIcon /></div>
-          </Link>
-        </div>
-      }
-
-      {params.pageNum != 1 && params.pageNum == data.total_pages &&
-        <div className="w-full flex justify-end gap-[20px]">          
-          <Link href={`${parseInt(params.pageNum)-1}`}>
-            <div><ArrowBackIosNewIcon /></div>
-          </Link>
-          
-          <div className="text-[#919090]"><ArrowForwardIosIcon /></div>
-        </div>
-      }
     </div>
   )
 }
