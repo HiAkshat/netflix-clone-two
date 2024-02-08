@@ -88,6 +88,10 @@ body{
   color: white;
 }
 
+.imageCover{
+  /* object-fit: cover; */
+}
+
 @media screen and (max-width: 640px) {
   body{
     /* background-color: antiquewhite; */
